@@ -19,6 +19,17 @@ body {
 }
 .beta-banner b { color: #533f03; }
 .beta-banner a { color: #533f03; text-decoration: underline; margin-left: 12px; }
+.beta-banner a.feedback-link {
+  background: #ff6b6b;
+  color: #fff;
+  text-decoration: none;
+  padding: 3px 10px;
+  border-radius: 4px;
+  font-weight: 500;
+  margin-left: 16px;
+  display: inline-block;
+}
+.beta-banner a.feedback-link:hover { background: #e74c3c; }
 
 /* Layout */
 .app { display: flex; min-height: 100vh; }
@@ -101,6 +112,38 @@ body {
 @media (max-width: 1100px) { .catalog-grid { grid-template-columns: repeat(3, 1fr); } }
 @media (max-width: 800px)  { .catalog-grid { grid-template-columns: repeat(2, 1fr); } }
 @media (max-width: 500px)  { .catalog-grid { grid-template-columns: 1fr; } }
+
+/* Feedback CTA on the index page — the only path to the form */
+.feedback-cta {
+  margin: 24px 20px 24px;
+  background: linear-gradient(180deg, #fff 0%, #fef5f0 100%);
+  border: 2px solid #ff6b6b;
+  border-radius: 10px;
+  padding: 36px 32px;
+}
+.feedback-cta-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 32px;
+  flex-wrap: wrap;
+}
+.feedback-cta-text { flex: 1; min-width: 280px; }
+.feedback-cta-title { font-size: 22px; font-weight: 600; color: #c0392b; margin-bottom: 8px; }
+.feedback-cta-sub { font-size: 14px; color: #4b5563; line-height: 1.6; }
+.feedback-cta-btn {
+  background: #ff6b6b;
+  color: #fff;
+  text-decoration: none;
+  padding: 14px 32px;
+  border-radius: 6px;
+  font-size: 15px;
+  font-weight: 500;
+  display: inline-block;
+  white-space: nowrap;
+  transition: all 0.15s;
+}
+.feedback-cta-btn:hover { background: #e74c3c; transform: translateY(-1px); box-shadow: 0 4px 12px rgba(255,107,107,0.3); }
 
 /* ============ PRODUCT PAGE ============ */
 .product-body { display: flex; gap: 0; }

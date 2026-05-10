@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Prelam - HDHMR — app.bonito.in</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="beta-banner">
+  <b>BETA PROTOTYPE</b> &middot; Click <b>"View Handbook"</b> below the Add to Cart button
+  <a href="index.html">&larr; Back to product list</a>
+</div>
+<div class="app">
+<aside class="sidebar">
+  <div class="logo">
+    <div class="logo-mark">B</div>
+    <div class="logo-text"><b>BONITO</b><span>PULSE</span></div>
+  </div>
+  <nav class="nav">
+    <div class="nav-item">Dashboard</div>
+    <div class="nav-item active">Daily Tracker</div>
+    <div class="nav-item">Tracker</div>
+    <div class="nav-item active">Scripts</div>
+    <div class="nav-item">Projects</div>
+    <div class="nav-item">The Bonito Studio</div>
+    <div class="nav-item active">Material Catalog</div>
+    <div class="nav-item">All Products</div>
+    <div class="nav-item">Create New Product</div>
+    <div class="nav-item">All Product types</div>
+    <div class="nav-item">All Product Categories</div>
+    <div class="nav-item">All Product Brands</div>
+    <div class="nav-item">Product Tags</div>
+    <div class="nav-item">Bulk Product upload</div>
+    <div class="nav-item">All Vendors</div>
+  </nav>
+</aside>
+  <div class="main">
+<div class="topbar">
+  <select class="select"><option>All category</option></select>
+  <input class="search-input" placeholder="Search product" />
+  <button class="btn-search">&#128269;</button>
+  <select class="select"><option>Bengaluru</option></select>
+  <button class="btn-qr">&#9881;</button>
+  <button class="btn-qr">Generate QR Codes</button>
+  <div class="right">
+    <span>Search:</span>
+    <input class="search-input" placeholder="Enter PID/Customer name" style="max-width:180px" />
+    <div class="avatar">S</div>
+  </div>
+</div>
+<div class="tabs">
+  <div class="tab active">Studio 2</div>
+  <div class="tab">Neo Modular</div>
+  <div class="tab">Services</div>
+</div>
+    <div class="product-body">
+      <div class="product-side">
+        <div class="product-img-wrap">
+          <div class="arrow-nav left">&lsaquo;</div>
+          <img src="images/prelam.png" alt="Prelam - HDHMR">
+          <div class="arrow-nav right">&rsaquo;</div>
+        </div>
+      </div>
+
+      <div class="details-side">
+        <div class="product-title">Prelam - HDHMR</div>
+        <div class="tags"><span class="tag">mumbai</span><span class="tag">bengaluru</span></div>
+
+        
+        
+
+        <div class="info-grid">
+          <div class="lbl">ERP Code</div><div class="val">BD-PH-2026-0001</div><div class="lbl">Brand</div><div class="val">HDHMR</div><div class="lbl">Category</div><div class="val">Panels</div>
+        </div>
+
+        <div class="variant-row">
+          <span class="label">Size</span>
+          <div class="variant-chips"><div class="chip active">5.5mm - BSL</div><div class="chip">16mm - BSL</div><div class="chip">16mm - OSR</div></div>
+        </div>
+
+        
+
+        <div class="field">
+          <span class="field-label">Quantity</span>
+          <input type="text" class="field-input" value="1">
+        </div>
+
+        <button class="btn-add-cart">Add to Cart</button>
+
+        <button class="handbook-btn" onclick="openHandbook()">
+          <div class="left-side">
+            <div class="icon-circle">i</div>
+            <div class="label-block">
+              <div class="title">View Handbook</div>
+              <div class="sub">Sizing &middot; finishes &middot; usage</div>
+            </div>
+          </div>
+          <div class="arrow">&rarr;</div>
+        </button>
+
+        
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="handbookModal">
+  <div class="modal">
+    <div class="modal-header">
+      <div class="left-info">
+        <div class="icon-block">i</div>
+        <div>
+          <div class="eyebrow">HANDBOOK &middot; iLAB</div>
+          <div class="h-title">Prelam HDHMR Standards</div>
+          <div class="h-context">Prelam - HDHMR &middot; mapped at variant level</div>
+        </div>
+      </div>
+      <button class="modal-close" onclick="closeHandbook()">&times;</button>
+    </div>
+
+    <iframe class="pdf-frame" src="pdfs/prelam_handbook.pdf#toolbar=1&navpanes=0" title="Handbook PDF"></iframe>
+
+    <div class="modal-footer">
+      <div class="source-info">
+        <span class="pill">iLAB Handbook v1.4</span>
+        <span>Source: Prelam_HDHMR.pptx &middot; iLAB upload pending</span>
+      </div>
+      <button class="got-it-btn" onclick="closeHandbook()">Got it, close</button>
+    </div>
+  </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>

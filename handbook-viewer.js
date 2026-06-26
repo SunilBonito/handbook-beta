@@ -11,9 +11,8 @@ import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 
 // ===== Configuration ===========================
-// When the real GLB is available, set this URL and the script will load it
-// instead of the procedural model. Example: 'models/pu_groove_cabinet.glb'
-const GLB_URL = null;  // <-- change to GLB path when ready
+// Real cabinet GLB converted from SKP via 3DS export
+const GLB_URL = 'models/cabinet.glb';
 
 // Brand-aligned colors (match the page CSS palette)
 const COLORS = {
@@ -270,25 +269,47 @@ if (GLB_URL) {
       // Remove procedural cabinet, add loaded model
       scene.remove(cabinet);
       const loaded = gltf.scene;
-      // Auto-center and scale the loaded model
+
+      // Auto-center and scale the loaded model to fit the viewport
       const box = new THREE.Box3().setFromObject(loaded);
       const size = box.getSize(new THREE.Vector3());
       const maxDim = Math.max(size.x, size.y, size.z);
       const scale = 1.4 / maxDim;
       loaded.scale.setScalar(scale);
-      const center = box.getCenter(new THREE.Vector3()).multiplyScalar(scale);
+
+      // Re-compute bbox after scaling, then center on origin
+      const scaledBox = new THREE.Box3().setFromObject(loaded);
+      const center = scaledBox.getCenter(new THREE.Vector3());
       loaded.position.sub(center);
+      // Sit on the floor plane
+      loaded.position.y -= scaledBox.min.y - center.y;
+
+      // Apply consistent PU finish material to all meshes
+      // (the 3DS conversion typically loses original materials)
+      const puFinishMat = new THREE.MeshStandardMaterial({
+        color: 0x1F1F1D,
+        roughness: 0.72,
+        metalness: 0.05,
+      });
       loaded.traverse(child => {
         if (child.isMesh) {
           child.castShadow = true;
           child.receiveShadow = true;
+          child.material = puFinishMat;
         }
       });
+
       scene.add(loaded);
+
+      // Hide the placeholder honesty note — we're showing the real model now
+      const note = document.querySelector('.placeholder-note');
+      if (note) note.style.display = 'none';
+
+      console.log('Cabinet GLB loaded successfully');
     },
     undefined,
     (err) => {
-      console.warn('GLB load failed, using procedural model.', err);
+      console.warn('GLB load failed, falling back to procedural model.', err);
     }
   );
 }

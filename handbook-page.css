@@ -142,7 +142,7 @@ body {
 }
 .vitrine-frame {
   position: relative;
-  background: var(--ink);
+  background: #3D3D3A;
   width: 100%;
   aspect-ratio: 4 / 5;
   overflow: hidden;
@@ -164,13 +164,13 @@ body {
   top: 0;
   bottom: 0;
   width: 32px;
-  background: var(--ink-soft);
+  background: #2F2F2D;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
   padding: 24px 0;
-  border-right: 1px solid #3A3A38;
+  border-right: 1px solid #4A4A47;
   pointer-events: none;
 }
 .ribbon-label, .ribbon-mono {

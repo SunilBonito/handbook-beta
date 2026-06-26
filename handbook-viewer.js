@@ -29,7 +29,7 @@ const width = container.clientWidth;
 const height = container.clientHeight;
 
 const scene = new THREE.Scene();
-scene.background = new THREE.Color(0x1A1A1A);
+scene.background = new THREE.Color(0x3D3D3A);  // warm dark grey — gives the matte black cabinet contrast to read against
 
 const camera = new THREE.PerspectiveCamera(38, width / height, 0.1, 100);
 const ISO_POSITION = new THREE.Vector3(1.6, 1.2, 1.8);
@@ -44,11 +44,16 @@ renderer.shadowMap.type = THREE.PCFSoftShadowMap;
 container.appendChild(renderer.domElement);
 
 // ===== Lighting ================================
-// Studio-lit specimen look: key + fill + rim
-const ambient = new THREE.AmbientLight(0xfff8ee, 0.35);
+// Studio-lit specimen look — tuned for a matte BLACK cabinet against grey backdrop.
+// Black absorbs most light, so we need bright keys + strong rim + reflective env.
+const ambient = new THREE.AmbientLight(0xfff8ee, 0.55);
 scene.add(ambient);
 
-const keyLight = new THREE.DirectionalLight(0xfff5e8, 1.4);
+// Hemisphere light gives the matte surface subtle top/bottom color variation
+const hemi = new THREE.HemisphereLight(0xfff5e8, 0x4A4844, 0.45);
+scene.add(hemi);
+
+const keyLight = new THREE.DirectionalLight(0xfff5e8, 2.2);
 keyLight.position.set(2, 3, 2.5);
 keyLight.castShadow = true;
 keyLight.shadow.mapSize.width = 2048;
@@ -62,13 +67,19 @@ keyLight.shadow.camera.far = 10;
 keyLight.shadow.bias = -0.0005;
 scene.add(keyLight);
 
-const fillLight = new THREE.DirectionalLight(0xb3614e, 0.25);
-fillLight.position.set(-2, 1, -1);
+const fillLight = new THREE.DirectionalLight(0xb3614e, 0.8);
+fillLight.position.set(-2, 1.5, -1);
 scene.add(fillLight);
 
-const rimLight = new THREE.DirectionalLight(0xe8e4dc, 0.4);
-rimLight.position.set(0, 1, -3);
+// Strong rim light from behind/above defines the cabinet's silhouette
+const rimLight = new THREE.DirectionalLight(0xe8e4dc, 1.4);
+rimLight.position.set(-1, 2, -3);
 scene.add(rimLight);
+
+// Second rim from the other side for full edge wrap
+const rimLight2 = new THREE.DirectionalLight(0xfff5e8, 0.9);
+rimLight2.position.set(3, 1.5, -2);
+scene.add(rimLight2);
 
 // ===== Floor (subtle ground catch) =============
 const floorGeom = new THREE.PlaneGeometry(10, 10);
@@ -200,8 +211,8 @@ const controls = new OrbitControls(camera, renderer.domElement);
 controls.target.set(0, 0.18, 0);
 controls.enableDamping = true;
 controls.dampingFactor = 0.08;
-controls.minDistance = 1.2;
-controls.maxDistance = 5;
+controls.minDistance = 0.8;
+controls.maxDistance = 8;
 controls.maxPolarAngle = Math.PI * 0.85;  // don't allow looking from below
 controls.update();
 
@@ -270,25 +281,31 @@ if (GLB_URL) {
       scene.remove(cabinet);
       const loaded = gltf.scene;
 
-      // Auto-center and scale the loaded model to fit the viewport
+      // STEP 1 — compute bounding box at native scale
       const box = new THREE.Box3().setFromObject(loaded);
       const size = box.getSize(new THREE.Vector3());
+      const center = box.getCenter(new THREE.Vector3());
+
+      console.log('GLB native size:', size, 'center:', center);
+
+      // STEP 2 — scale so the LARGEST dimension fits within ~1.2 units
+      // (smaller than 1.4 so the cabinet has breathing room in the vitrine)
+      const TARGET_SIZE = 1.2;
       const maxDim = Math.max(size.x, size.y, size.z);
-      const scale = 1.4 / maxDim;
+      const scale = TARGET_SIZE / maxDim;
       loaded.scale.setScalar(scale);
 
-      // Re-compute bbox after scaling, then center on origin
-      const scaledBox = new THREE.Box3().setFromObject(loaded);
-      const center = scaledBox.getCenter(new THREE.Vector3());
-      loaded.position.sub(center);
-      // Sit on the floor plane
-      loaded.position.y -= scaledBox.min.y - center.y;
+      // STEP 3 — move the model so its center sits at world origin (XZ),
+      // and its base sits on the floor plane (Y = -0.36 to match shadow catcher)
+      loaded.position.x = -center.x * scale;
+      loaded.position.z = -center.z * scale;
+      loaded.position.y = -box.min.y * scale - 0.36;  // base on floor
 
-      // Apply consistent PU finish material to all meshes
+      // STEP 4 — apply consistent PU finish material to all meshes
       // (the 3DS conversion typically loses original materials)
       const puFinishMat = new THREE.MeshStandardMaterial({
         color: 0x1F1F1D,
-        roughness: 0.72,
+        roughness: 0.55,        // slightly less rough than before so light catches edges
         metalness: 0.05,
       });
       loaded.traverse(child => {
@@ -301,15 +318,44 @@ if (GLB_URL) {
 
       scene.add(loaded);
 
+      // STEP 5 — re-aim the camera target at the cabinet's actual center
+      // (so it stays in frame as you orbit)
+      const finalBox = new THREE.Box3().setFromObject(loaded);
+      const finalCenter = finalBox.getCenter(new THREE.Vector3());
+      controls.target.copy(finalCenter);
+      // Pull camera back so we see the whole cabinet, not a corner
+      camera.position.set(
+        finalCenter.x + 1.8,
+        finalCenter.y + 1.0,
+        finalCenter.z + 2.2
+      );
+      controls.update();
+
+      // Also update the view presets to use the new center
+      VIEWS.iso.target.copy(finalCenter);
+      VIEWS.iso.pos.set(finalCenter.x + 1.8, finalCenter.y + 1.0, finalCenter.z + 2.2);
+      VIEWS.front.target.copy(finalCenter);
+      VIEWS.front.pos.set(finalCenter.x, finalCenter.y, finalCenter.z + 2.8);
+      VIEWS.side.target.copy(finalCenter);
+      VIEWS.side.pos.set(finalCenter.x + 2.8, finalCenter.y, finalCenter.z);
+      VIEWS.top.target.copy(finalCenter);
+      VIEWS.top.pos.set(finalCenter.x + 0.001, finalCenter.y + 3.0, finalCenter.z + 0.001);
+
       // Hide the placeholder honesty note — we're showing the real model now
       const note = document.querySelector('.placeholder-note');
       if (note) note.style.display = 'none';
 
-      console.log('Cabinet GLB loaded successfully');
+      console.log('Cabinet GLB loaded · scale:', scale, '· final center:', finalCenter);
     },
-    undefined,
+    (xhr) => {
+      // Progress callback
+      if (xhr.lengthComputable) {
+        const pct = (xhr.loaded / xhr.total * 100).toFixed(0);
+        console.log(`Loading cabinet: ${pct}%`);
+      }
+    },
     (err) => {
-      console.warn('GLB load failed, falling back to procedural model.', err);
+      console.warn('GLB load failed, keeping procedural model.', err);
     }
   );
 }

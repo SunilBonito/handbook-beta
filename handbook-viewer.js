@@ -29,7 +29,7 @@ const width = container.clientWidth;
 const height = container.clientHeight;
 
 const scene = new THREE.Scene();
-scene.background = new THREE.Color(0x3D3D3A);  // warm dark grey — gives the matte black cabinet contrast to read against
+scene.background = new THREE.Color(0xF2F0EA);  // warm off-white — matches page bone palette, lets the matte black cabinet pop without harsh contrast
 
 const camera = new THREE.PerspectiveCamera(38, width / height, 0.1, 100);
 const ISO_POSITION = new THREE.Vector3(1.6, 1.2, 1.8);
@@ -44,16 +44,17 @@ renderer.shadowMap.type = THREE.PCFSoftShadowMap;
 container.appendChild(renderer.domElement);
 
 // ===== Lighting ================================
-// Studio-lit specimen look — tuned for a matte BLACK cabinet against grey backdrop.
-// Black absorbs most light, so we need bright keys + strong rim + reflective env.
-const ambient = new THREE.AmbientLight(0xfff8ee, 0.55);
+// Gallery-style soft lighting tuned for a matte BLACK cabinet on warm OFF-WHITE.
+// White bounces ambient back, so we need less direct light than on dark backgrounds.
+// Goal: edges visible, soft shadow on floor, no harsh hot spots.
+const ambient = new THREE.AmbientLight(0xfff8ee, 0.85);
 scene.add(ambient);
 
-// Hemisphere light gives the matte surface subtle top/bottom color variation
-const hemi = new THREE.HemisphereLight(0xfff5e8, 0x4A4844, 0.45);
+// Hemisphere gives subtle top-down warmth variation
+const hemi = new THREE.HemisphereLight(0xfff5e8, 0xD9D5CC, 0.4);
 scene.add(hemi);
 
-const keyLight = new THREE.DirectionalLight(0xfff5e8, 2.2);
+const keyLight = new THREE.DirectionalLight(0xfff5e8, 1.1);
 keyLight.position.set(2, 3, 2.5);
 keyLight.castShadow = true;
 keyLight.shadow.mapSize.width = 2048;
@@ -65,25 +66,22 @@ keyLight.shadow.camera.bottom = -2;
 keyLight.shadow.camera.near = 0.1;
 keyLight.shadow.camera.far = 10;
 keyLight.shadow.bias = -0.0005;
+keyLight.shadow.radius = 4;  // soften shadow edges
 scene.add(keyLight);
 
-const fillLight = new THREE.DirectionalLight(0xb3614e, 0.8);
-fillLight.position.set(-2, 1.5, -1);
+// Soft fill from the opposite side, slightly warm
+const fillLight = new THREE.DirectionalLight(0xfff5e8, 0.5);
+fillLight.position.set(-2.5, 1.5, 1);
 scene.add(fillLight);
 
-// Strong rim light from behind/above defines the cabinet's silhouette
-const rimLight = new THREE.DirectionalLight(0xe8e4dc, 1.4);
-rimLight.position.set(-1, 2, -3);
+// Subtle rim light from behind to define silhouette against the bright background
+const rimLight = new THREE.DirectionalLight(0xe8e4dc, 0.3);
+rimLight.position.set(0, 2, -2.5);
 scene.add(rimLight);
-
-// Second rim from the other side for full edge wrap
-const rimLight2 = new THREE.DirectionalLight(0xfff5e8, 0.9);
-rimLight2.position.set(3, 1.5, -2);
-scene.add(rimLight2);
 
 // ===== Floor (subtle ground catch) =============
 const floorGeom = new THREE.PlaneGeometry(10, 10);
-const floorMat = new THREE.ShadowMaterial({ opacity: 0.35 });
+const floorMat = new THREE.ShadowMaterial({ opacity: 0.18 });  // softer for white background
 const floor = new THREE.Mesh(floorGeom, floorMat);
 floor.rotation.x = -Math.PI / 2;
 floor.position.y = -0.36;

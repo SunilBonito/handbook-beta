@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Blueprint Configurator · Concept Preview · Bonito</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="configurator.css">
+</head>
+<body>
+
+<div class="concept-banner">
+  <span class="banner-pill">CONCEPT</span>
+  <span>Non-functional preview — for direction only</span>
+  <a href="index.html" class="banner-link">&larr; Catalog</a>
+</div>
+
+<main class="page">
+
+  <header class="page-head">
+    <nav class="crumbs">
+      <a href="index.html">Material catalog</a>
+      <span class="sep">/</span>
+      <span>Configurator</span>
+      <span class="sep">/</span>
+      <span class="current">Kitchen bottom cabinet</span>
+    </nav>
+    <div class="erp-strip">
+      <span class="erp-label">SESSION</span>
+      <span class="erp-code">CFG-001</span>
+      <span class="erp-sep">·</span>
+      <span class="erp-finish">Untitled configuration</span>
+    </div>
+  </header>
+
+  <section class="hero-intro">
+    <span class="eyebrow">Concept · configurator preview</span>
+    <h1 class="page-title">Build a cabinet from validated parts.</h1>
+    <p class="lede">Pick a body, a shutter, hardware and finish. The system enforces valid combinations. The output is a spec-perfect quote and a 3D preview — ready to drop into ODP.</p>
+  </section>
+
+  <!-- 3-panel workspace -->
+  <section class="workspace">
+
+    <!-- LEFT: Parts library -->
+    <aside class="parts-panel">
+      <div class="panel-head">
+        <span class="panel-eyebrow">Step 1 of 4</span>
+        <h2 class="panel-title">Parts library</h2>
+      </div>
+
+      <!-- Category tabs -->
+      <nav class="cat-tabs">
+        <button class="cat-tab active">Body</button>
+        <button class="cat-tab">Shutter</button>
+        <button class="cat-tab">Hardware</button>
+        <button class="cat-tab">Finish</button>
+      </nav>
+
+      <!-- Search -->
+      <div class="parts-search">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.35-4.35"/></svg>
+        <input type="text" placeholder="Search cabinet bodies" value="" disabled>
+      </div>
+
+      <!-- Filter chips -->
+      <div class="filter-chips">
+        <span class="filter-chip active">Kitchen</span>
+        <span class="filter-chip">Wardrobe</span>
+        <span class="filter-chip">Loft</span>
+        <span class="filter-chip">Bed</span>
+      </div>
+
+      <!-- Parts list -->
+      <div class="parts-list">
+        <div class="part-item selected">
+          <div class="part-thumb">
+            <svg viewBox="0 0 60 80" xmlns="http://www.w3.org/2000/svg">
+              <rect x="8" y="8" width="44" height="60" fill="#3D3D3A" stroke="#5F5E5A" stroke-width="0.5"/>
+              <rect x="8" y="64" width="44" height="6" fill="#2F2F2D"/>
+            </svg>
+          </div>
+          <div class="part-meta">
+            <span class="part-code">BK-450</span>
+            <span class="part-name">Bottom cabinet, 450 mm</span>
+            <span class="part-hint">1 shutter · fixed shelf</span>
+          </div>
+          <div class="part-check">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
+          </div>
+        </div>
+
+        <div class="part-item">
+          <div class="part-thumb">
+            <svg viewBox="0 0 60 80" xmlns="http://www.w3.org/2000/svg">
+              <rect x="4" y="8" width="52" height="60" fill="#3D3D3A" stroke="#5F5E5A" stroke-width="0.5"/>
+              <rect x="4" y="64" width="52" height="6" fill="#2F2F2D"/>
+              <line x1="30" y1="8" x2="30" y2="64" stroke="#5F5E5A" stroke-width="0.5"/>
+            </svg>
+          </div>
+          <div class="part-meta">
+            <span class="part-code">BK-600</span>
+            <span class="part-name">Bottom cabinet, 600 mm</span>
+            <span class="part-hint">2 shutter · fixed shelf</span>
+          </div>
+        </div>
+
+        <div class="part-item">
+          <div class="part-thumb">
+            <svg viewBox="0 0 60 80" xmlns="http://www.w3.org/2000/svg">
+              <rect x="8" y="8" width="44" height="60" fill="#3D3D3A" stroke="#5F5E5A" stroke-width="0.5"/>
+              <line x1="8" y1="28" x2="52" y2="28" stroke="#5F5E5A" stroke-width="0.5"/>
+              <line x1="8" y1="46" x2="52" y2="46" stroke="#5F5E5A" stroke-width="0.5"/>
+              <rect x="8" y="64" width="44" height="6" fill="#2F2F2D"/>
+            </svg>
+          </div>
+          <div class="part-meta">
+            <span class="part-code">BK-450-D3</span>
+            <span class="part-name">Bottom cabinet, 3 drawer</span>
+            <span class="part-hint">3 soft-close drawers</span>
+          </div>
+        </div>
+
+        <div class="part-item disabled">
+          <div class="part-thumb">
+            <svg viewBox="0 0 60 80" xmlns="http://www.w3.org/2000/svg">
+              <rect x="8" y="8" width="44" height="60" fill="#3D3D3A" stroke="#5F5E5A" stroke-width="0.5"/>
+              <rect x="8" y="64" width="44" height="6" fill="#2F2F2D"/>
+              <circle cx="30" cy="38" r="8" fill="none" stroke="#5F5E5A" stroke-width="0.5"/>
+            </svg>
+          </div>
+          <div class="part-meta">
+            <span class="part-code">BK-450-SC</span>
+            <span class="part-name">Corner cabinet</span>
+            <span class="part-hint">Incompatible with current shutter</span>
+          </div>
+          <div class="part-warn">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 9v4"/><path d="M12 17h.01"/><path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0Z"/></svg>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- MIDDLE: Assembly viewer -->
+    <section class="assembly-panel">
+      <div class="assembly-frame">
+
+        <!-- Spec ribbon down the left edge -->
+        <aside class="spec-ribbon">
+          <span class="ribbon-label">ASSEMBLY</span>
+          <span class="ribbon-mono">CFG · 001 · DRAFT</span>
+        </aside>
+
+        <!-- Faux 3D isometric SVG representation -->
+        <div class="assembly-canvas">
+          <svg viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
+            <defs>
+              <linearGradient id="cabinetFront" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#252523"/>
+                <stop offset="100%" stop-color="#1A1A18"/>
+              </linearGradient>
+              <linearGradient id="cabinetSide" x1="0" y1="0" x2="1" y2="0">
+                <stop offset="0%" stop-color="#1F1F1D"/>
+                <stop offset="100%" stop-color="#0D0D0C"/>
+              </linearGradient>
+              <linearGradient id="cabinetTop" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#2E2E2C"/>
+                <stop offset="100%" stop-color="#232321"/>
+              </linearGradient>
+            </defs>
+
+            <!-- Floor shadow -->
+            <ellipse cx="260" cy="440" rx="180" ry="16" fill="#000" opacity="0.12"/>
+
+            <!-- Cabinet body (isometric) -->
+            <!-- Top face -->
+            <polygon points="120,120 340,120 400,80 180,80" fill="url(#cabinetTop)" stroke="#000" stroke-width="0.5" stroke-opacity="0.2"/>
+            <!-- Front face -->
+            <polygon points="120,120 340,120 340,410 120,410" fill="url(#cabinetFront)" stroke="#000" stroke-width="0.5" stroke-opacity="0.3"/>
+            <!-- Right side -->
+            <polygon points="340,120 400,80 400,370 340,410" fill="url(#cabinetSide)" stroke="#000" stroke-width="0.5" stroke-opacity="0.3"/>
+
+            <!-- Groove pattern on front (6mm grooves) -->
+            <g opacity="0.75">
+              <line x1="155" y1="130" x2="155" y2="405" stroke="#000" stroke-width="1.2"/>
+              <line x1="180" y1="130" x2="180" y2="405" stroke="#000" stroke-width="1.2"/>
+              <line x1="205" y1="130" x2="205" y2="405" stroke="#000" stroke-width="1.2"/>
+              <line x1="230" y1="130" x2="230" y2="405" stroke="#000" stroke-width="1.2"/>
+              <line x1="255" y1="130" x2="255" y2="405" stroke="#000" stroke-width="1.2"/>
+              <line x1="280" y1="130" x2="280" y2="405" stroke="#000" stroke-width="1.2"/>
+              <line x1="305" y1="130" x2="305" y2="405" stroke="#000" stroke-width="1.2"/>
+            </g>
+
+            <!-- Skirting -->
+            <polygon points="120,410 340,410 340,430 120,430" fill="#0D0D0C"/>
+            <polygon points="340,410 400,370 400,390 340,430" fill="#0A0A09"/>
+
+            <!-- Hinge suggestions on left edge -->
+            <circle cx="126" cy="170" r="3" fill="#7A7A75" opacity="0.6"/>
+            <circle cx="126" cy="360" r="3" fill="#7A7A75" opacity="0.6"/>
+
+            <!-- Dimension callouts (subtle) -->
+            <g opacity="0.5" font-family="JetBrains Mono, monospace" font-size="9" fill="#6B665D">
+              <line x1="80" y1="120" x2="80" y2="410" stroke="#B3614E" stroke-width="0.5" stroke-dasharray="2 2"/>
+              <text x="55" y="270" text-anchor="middle" transform="rotate(-90 55 270)">700 mm</text>
+
+              <line x1="120" y1="470" x2="340" y2="470" stroke="#B3614E" stroke-width="0.5" stroke-dasharray="2 2"/>
+              <text x="230" y="485" text-anchor="middle">450 mm</text>
+            </g>
+          </svg>
+        </div>
+
+        <!-- View controls -->
+        <div class="assembly-controls">
+          <div class="control-group">
+            <button class="view-btn active">Isometric</button>
+            <button class="view-btn">Front</button>
+            <button class="view-btn">Exploded</button>
+          </div>
+          <div class="control-group right">
+            <button class="util-btn">Reset</button>
+          </div>
+        </div>
+
+        <div class="assembly-status">
+          <span class="status-dot valid"></span>
+          <span class="status-text">Valid configuration · 3 parts assembled</span>
+        </div>
+
+        <div class="assembly-hint">
+          Concept preview · not interactive
+        </div>
+      </div>
+    </section>
+
+    <!-- RIGHT: Live spec summary -->
+    <aside class="summary-panel">
+      <div class="panel-head">
+        <span class="panel-eyebrow">Live summary</span>
+        <h2 class="panel-title">Your configuration</h2>
+      </div>
+
+      <!-- Selected parts -->
+      <div class="config-block">
+        <div class="block-title">Selected parts</div>
+        <div class="config-row">
+          <div class="row-label">Body</div>
+          <div class="row-val">BK-450</div>
+        </div>
+        <div class="config-row">
+          <div class="row-label">Shutter</div>
+          <div class="row-val">PU GS6 <span class="row-sub">6mm Groove</span></div>
+        </div>
+        <div class="config-row">
+          <div class="row-label">Hinges</div>
+          <div class="row-val">HWHT9242902</div>
+        </div>
+        <div class="config-row">
+          <div class="row-label">Finish</div>
+          <div class="row-val">PU 4009 MT</div>
+        </div>
+      </div>
+
+      <!-- Dimensions -->
+      <div class="config-block">
+        <div class="block-title">Dimensions</div>
+        <div class="dim-grid">
+          <div class="dim-cell">
+            <span class="dim-label">Width</span>
+            <span class="dim-val">450 <span class="dim-unit">mm</span></span>
+          </div>
+          <div class="dim-cell">
+            <span class="dim-label">Height</span>
+            <span class="dim-val">700 <span class="dim-unit">mm</span></span>
+          </div>
+          <div class="dim-cell">
+            <span class="dim-label">Depth</span>
+            <span class="dim-val">600 <span class="dim-unit">mm</span></span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Compliance -->
+      <div class="config-block">
+        <div class="block-title">Compliance</div>
+        <div class="compliance-list">
+          <div class="compliance-item ok">
+            <div class="c-icon">
+              <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
+            </div>
+            <div class="c-text">Within published width range (300–600 mm)</div>
+          </div>
+          <div class="compliance-item ok">
+            <div class="c-icon">
+              <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
+            </div>
+            <div class="c-text">Shutter clearance of 3 mm applied</div>
+          </div>
+          <div class="compliance-item ok">
+            <div class="c-icon">
+              <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
+            </div>
+            <div class="c-text">Hinge compatible with 25 mm shutter</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- BOM count -->
+      <div class="config-block">
+        <div class="block-title">Bill of materials</div>
+        <div class="bom-summary">
+          <span class="bom-count">9 items</span>
+          <span class="bom-hint">Auto-generated · ready for procurement</span>
+        </div>
+      </div>
+
+      <!-- Actions -->
+      <div class="config-actions">
+        <button class="action-primary" disabled>
+          <span>Send to ODP</span>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+        </button>
+        <button class="action-secondary" disabled>Save draft</button>
+      </div>
+
+      <p class="concept-note">
+        Buttons are non-functional in this preview. Live version would push a spec-perfect BOM into ODP and open the 3D file for placement.
+      </p>
+    </aside>
+
+  </section>
+
+  <!-- Explanation strip -->
+  <section class="explain-strip">
+    <div class="explain-item">
+      <div class="explain-num">01</div>
+      <div class="explain-body">
+        <h3 class="explain-title">Same parts, different products</h3>
+        <p class="explain-text">A "bottom cabinet body" isn't a kitchen thing — it's a modular block. The same body configured for the loft becomes a storage cabinet. Different context, same validated part.</p>
+      </div>
+    </div>
+
+    <div class="explain-item">
+      <div class="explain-num">02</div>
+      <div class="explain-body">
+        <h3 class="explain-title">Constraints are enforced automatically</h3>
+        <p class="explain-text">If a designer picks a shutter incompatible with the chosen hinge, the invalid combination is greyed out. No more silent mismatches making it to site.</p>
+      </div>
+    </div>
+
+    <div class="explain-item">
+      <div class="explain-num">03</div>
+      <div class="explain-body">
+        <h3 class="explain-title">Output is production-ready</h3>
+        <p class="explain-text">Every valid configuration produces a complete BOM with ERP codes. Push to ODP, procurement receives the exact list, factory receives the exact build. Zero interpretation.</p>
+      </div>
+    </div>
+  </section>
+
+  <footer class="page-foot">
+    <div class="foot-left">
+      <span class="foot-brand">Bonito</span>
+      <span class="foot-tag">Live beautiful.</span>
+    </div>
+    <div class="foot-right">
+      <span>iLab · Innovation initiative</span>
+      <span class="foot-mono">CFG-001 · Concept preview · Internal only</span>
+    </div>
+  </footer>
+
+</main>
+
+</body>
+</html>
